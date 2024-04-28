@@ -1,0 +1,53 @@
+<html>
+
+<head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+  <script>
+
+    function start() {
+      sjs.open("target", 1500, 780);
+      //New balls
+
+      var mtext = new sjs.Text("D.Z. Interactives: Dungeon Crawler", 50, "white");
+      mtext.type = "mtext";
+      mtext.offset(160, 150);
+
+
+      setInterval(function () {
+        var Deathball1 = new sjs.Image("GameImages/deathball1.png");
+        Deathball1.type = "Deathball1";
+        Deathball1.centerH();
+        Deathball1.setSize(20, 20);
+        Deathball1.friction = 0;
+        Deathball1.bounce();
+        Deathball1.pushUp(4);
+        Deathball1.pushRight(3);
+      }, 4000);
+
+      sjs.onHit("Deathball1", "mtext", function (Deathball1, mtext) {
+        sjs.bounceOff(Deathball1, mtext);
+      });
+
+      var plybutton = new sjs.Button("Start", function () {
+        window.location = "index.html";
+      });
+
+      plybutton.offset(160, 300);
+      plybutton.setSize(500, 500);
+
+
+
+
+    } //End Start
+
+
+
+
+  </script>
+</head>
+
+<body onload="start()">
+  <h1> Dungeon Crawler </h1>
+  <div id="target" style="margin:auto;background:black;""></div>
+        </body>
+</html>

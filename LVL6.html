@@ -1,0 +1,399 @@
+<html>
+
+<head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+  <script>
+
+    function start() {
+      sjs.open("target", 1500, 780);
+
+      //Character
+
+      var character1 = new sjs.Image("GameImages/square.png");
+      character1.type = "character1";
+      character1.setSize(30, 30);
+      character1.centerH().bottom();
+      character1.friction = 0.6;
+      character1.accel = 0.3;
+
+      //Character Movements
+
+      sjs.keyDown(W_KEY, function () {
+        character1.pushUp();
+      });
+
+      sjs.keyDown(S_KEY, function () {
+        character1.pushDown();
+      });
+
+      sjs.keyDown(A_KEY, function () {
+        character1.pushLeft();
+      });
+
+      sjs.keyDown(D_KEY, function () {
+        character1.pushRight();
+      });
+
+      sjs.keyDown(G_KEY, function () {
+        character1.friction = 0.3;
+        character1.accel = 0.6;
+        character1.pushUp(4);
+      });
+
+      sjs.keyDown(H_KEY, function () {
+        character1.friction = 0.3;
+        character1.accel = 0.6;
+        character1.pushDown(4);
+      });
+
+      sjs.keyDown(V_KEY, function () {
+        character1.friction = 0.3;
+        character1.accel = 0.6;
+        character1.pushLeft(4);
+      });
+
+      sjs.keyDown(B_KEY, function () {
+        character1.friction = 0.3;
+        character1.accel = 0.6;
+        character1.pushRight(4);
+      });
+
+      //Deathball Properties
+
+      var Deathball = new sjs.Image("GameImages/deathball1.png");
+      Deathball.type = "Deathball";
+      Deathball.centerH();
+      Deathball.setSize(20, 20);
+      Deathball.friction = 0;
+      Deathball.bounce();
+      Deathball.pushUp(4);
+      Deathball.pushRight(3);
+
+      //Deathball collision
+
+      sjs.onHit("Deathball", "character1", function (Deathball, character1) {
+        window.location = "gameover.html"
+      });
+
+      sjs.onHit("Deathball", "sheldoncharacter", function (Deathball, sheldoncharacter) {
+        window.location = "gameover.html"
+      });
+
+      //Walls
+      var wall1 = new sjs.Image("GameImages/wall1.png");
+      wall1.type = "wall1";
+      wall1.setSize(1500, 50);
+      wall1.offset(-1500, 600);
+
+      var wall2 = new sjs.Image("GameImages/wall1.png");
+      wall2.type = "wall1";
+      wall2.setSize(1500, 50);
+      wall2.offset(1500, 400);
+
+      var wall3 = new sjs.Image("GameImages/wall3.png");
+      wall3.type = "wall3";
+      wall3.setSize(50, 600);
+      wall3.offset(550, -500);
+
+      var wall4 = new sjs.Image("GameImages/wall3.png");
+      wall4.type = "wall3";
+      wall4.setSize(50, 650);
+      wall4.offset(900, -200);
+
+      var killwall = new sjs.Image("GameImages/redwall.png");
+      killwall.type = "killwall";
+      killwall.setSize(1400, 10);
+      killwall.offset(-2000, 650);
+
+      var invertwall = new sjs.Image("GameImages/invertwall.png");
+      invertwall.type = "invertwall";
+      invertwall.setSize(10, 120);
+      invertwall.offset(950, 3700);
+
+      //END LVL WALL
+      var endwall = new sjs.Image("GameImages/endwall.png");
+      endwall.type = "endwall";
+      endwall.setSize(500, 100);
+      endwall.top().left();
+
+      //END LVL WALL COLLISION
+
+      sjs.onHit("character1", "endwall", function (character1, endwall) {
+        window.location = "LVL6.html";
+      });
+
+      sjs.onHit("sheldoncharacter", "endwall", function (sheldoncharacter, endwall) {
+        window.location = "LVL6.html";
+      });
+      //Normal wall collisions
+
+      sjs.onHit("character1", "wall1", function (character1, wall1) {
+        sjs.bounceOff(character1, wall1);
+      });
+
+      sjs.onHit("character1", "wall2", function (character1, wall2) {
+        sjs.bounceOff(character1, wall2);
+      });
+
+      sjs.onHit("Deathball", "wall1", function (Deathball, wall1) {
+        sjs.bounceOff(Deathball, wall1);
+      });
+
+      sjs.onHit("Deathball", "wall2", function (Deathball, wall2) {
+        sjs.bounceOff(Deathball, wall2);
+      });
+
+      sjs.onHit("Deathball", "wall3", function (Deathball, wall3) {
+        sjs.bounceOff(Deathball, wall3);
+      });
+
+      sjs.onHit("character1", "wall3", function (character1, wall3) {
+        sjs.bounceOff(character1, wall3);
+      });
+
+      sjs.onHit("Deathball", "wall4", function (Deathball, wall4) {
+        sjs.bounceOff(Deathball, wall4);
+      });
+
+      sjs.onHit("character1", "wall4", function (character1, wall4) {
+        sjs.bounceOff(character1, wall4);
+      });
+
+      //Special Wall Collsisions
+
+      sjs.onHit("character1", "killwall", function (character1, killwall) {
+        window.location = "gameover.html";
+      });
+
+      sjs.onHit("character1", "invertwall", function (character1, invertwall) {
+        sjs.keyDown(H_KEY, function () {
+          character1.friction = 0.3;
+          character1.accel = 0.6;
+          character1.pushUp(4);
+        });
+
+        sjs.keyDown(G_KEY, function () {
+          character1.friction = 0.3;
+          character1.accel = 0.6;
+          character1.pushDown(4);
+        });
+
+        sjs.keyDown(B_KEY, function () {
+          character1.friction = 0.3;
+          character1.accel = 0.6;
+          character1.pushLeft(4);
+        });
+
+        sjs.keyDown(V_KEY, function () {
+          character1.friction = 0.3;
+          character1.accel = 0.6;
+          character1.pushRight(4);
+        });
+      });
+
+      //Sheldon Invert
+
+      sjs.onHit("sheldoncharacter", "invertwall", function (sheldoncharacter, invertwall) {
+        sjs.keyDown(P_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushUp(4);
+        });
+
+        sjs.keyDown(O_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushDown(4);
+        });
+
+        sjs.keyDown(L_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushLeft(4);
+        });
+
+        sjs.keyDown(K_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushRight(4);
+        });
+      });
+
+
+
+
+      //New balls
+
+      setInterval(function () {
+        var Deathball1 = new sjs.Image("GameImages/deathball1.png");
+        Deathball1.type = "Deathball1";
+        Deathball1.centerH();
+        Deathball1.setSize(20, 20);
+        Deathball1.friction = 0;
+        Deathball1.bounce();
+        Deathball1.pushUp(4);
+        Deathball1.pushRight(3);
+      }, 4000);
+
+      //New ball collisions
+
+      sjs.onHit("Deathball1", "character1", function () {
+        window.location = "gameover.html";
+      });
+
+      sjs.onHit("Deathball1", "sheldoncharacter", function () {
+        window.location = "gameover.html";
+      });
+
+      sjs.onHit("Deathball1", "wall1", function (Deathball1, wall1) {
+        sjs.bounceOff(Deathball1, wall1);
+      });
+
+      sjs.onHit("Deathball1", "wall2", function (Deathball1, wall2) {
+        sjs.bounceOff(Deathball1, wall2);
+      });
+
+      sjs.onHit("Deathball1", "wall3", function (Deathball1, wall3) {
+        sjs.bounceOff(Deathball1, wall3);
+      });
+
+      sjs.onHit("Deathball1", "wall3", function (Deathball1, wall3) {
+        sjs.bounceOff(Deathball1, wall3);
+      });
+
+      sjs.onHit("Deathball1", "wall4", function (Deathball1, wall4) {
+        sjs.bounceOff(Deathball1, wall4);
+      });
+
+      //Text
+
+      var ttext = new sjs.Text("You can go through the blue walls, but they invert your abilities controls!", 20, "white");
+      ttext.type = "ttext";
+      ttext.bottom().left();
+
+      //Speedrun Timer For level
+      var time = 0;
+      var time_txt = new sjs.Text("Time: 0", 21, "orange");
+      time.type = "time";
+
+      setInterval(function () {
+        time = time + 1;
+        time_txt.setText("Time: " + time);
+      }, 1000);
+
+      //Sheldon 
+
+      sjs.keyDown(L_KEY, function () {
+        var sheldoncharacter = new sjs.Image("GameImages/sheldon.png");
+
+        sheldoncharacter.type = "sheldoncharacter";
+        sheldoncharacter.setSize(40, 40);
+        sheldoncharacter.centerH().bottom();
+        sheldoncharacter.friction = 0.6;
+        sheldoncharacter.accel = 0.3;
+
+        //Sheldon controls
+
+        sjs.keyDown(UP_KEY, function () {
+          sheldoncharacter.pushUp();
+        });
+
+        sjs.keyDown(DOWN_KEY, function () {
+          sheldoncharacter.pushDown();
+        });
+
+        sjs.keyDown(LEFT_KEY, function () {
+          sheldoncharacter.pushLeft();
+        });
+
+        sjs.keyDown(RIGHT_KEY, function () {
+          sheldoncharacter.pushRight();
+        });
+
+        sjs.keyDown(O_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushUp(4);
+        });
+
+        sjs.keyDown(P_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushDown(4);
+        });
+
+        sjs.keyDown(K_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushLeft(4);
+        });
+
+        sjs.keyDown(L_KEY, function () {
+          sheldoncharacter.friction = 0.3;
+          sheldoncharacter.accel = 0.6;
+          sheldoncharacter.pushRight(4);
+        });
+      });
+
+      //Collisions 
+      sjs.onHit("sheldoncharacter", "wall1", function (sheldoncharacter, wall1) {
+        sjs.bounceOff(sheldoncharacter, wall1);
+      });
+
+      sjs.onHit("sheldoncharacter", "wall2", function (sheldoncharacter, wall2) {
+        sjs.bounceOff(sheldoncharacter, wall2);
+      });
+
+      sjs.onHit("sheldoncharacter", "wall3", function (sheldoncharacter, wall3) {
+        sjs.bounceOff(sheldoncharacter, wall3);
+      });
+
+      sjs.onHit("sheldoncharacter", "wall4", function (sheldoncharacter, wall4) {
+        sjs.bounceOff(sheldoncharacter, wall4);
+      });
+
+      sjs.onHit("sheldoncharacter", "killwall", function (sheldoncharacter, killwall) {
+        window.location = "gameover.html";
+      });
+
+      //Character Collisions
+      sjs.onHit("character1", "sheldoncharacter", function (character1, sheldoncharacter) {
+        sjs.bounceOff(character1, sheldoncharacter);
+      });
+
+      //Thesillysteleport
+
+      var thesillystel = new sjs.Image("GameImages/blackbox.png");
+
+      thesillystel.type = "thesillystel"
+      thesillystel.setSize(40, 40);
+      thesillystel.offset(1450, -300);
+      sjs.onHit("sheldoncharacter", "thesillystel", function (sheldoncharacter, thesillystel) {
+        sjs.bounceOff(sheldoncharacter, thesillystel);
+        window.location = "thesillys.html";
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+    } //End Start
+
+
+
+
+  </script>
+</head>
+
+<body onload="start()">
+  <h1> Dungeon Crawler </h1>
+  <div id="target" style="margin:auto;background:black;""></div>
+        </body>
+</html>

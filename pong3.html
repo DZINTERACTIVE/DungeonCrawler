@@ -1,0 +1,109 @@
+<html>
+
+<head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+  <script>
+
+    function start() {
+      sjs.open("Target", 1500, 780);
+
+      //Ball & Properties
+
+      var ball1 = new sjs.Image("GameImages/square.png");
+
+      ball1.type = "ball";
+      ball1.center();
+      ball1.setSize(20, 20);
+      ball1.friction = 0;
+      ball1.bounce();
+      ball1.pushUp(7);
+      ball1.pushRight(4);
+
+      sjs.onHit("ball", "paddle", function (ball, paddle) {
+        sjs.bounceOff(ball, paddle);
+      });
+
+
+      //Paddles & Properties
+      var paddle1 = new sjs.Image("GameImages/realpaddle2.png");
+
+      paddle1.type = "paddle";
+      paddle1.center().left();
+
+      sjs.keyDown(S_KEY, function () {
+        paddle1.pushDown(2);
+      });
+
+      sjs.keyDown(W_KEY, function () {
+        paddle1.pushUp(2);
+      });
+
+      var paddle2 = new sjs.Image("GameImages/realpaddle2.png");
+
+      paddle2.type = "paddle";
+      paddle2.center().right();
+
+      sjs.keyDown(DOWN_KEY, function () {
+        paddle2.pushDown(2);
+      });
+
+      sjs.keyDown(UP_KEY, function () {
+        paddle2.pushUp(2);
+      });
+
+      //Text 
+      var ttext = new sjs.Text("Get the moving ball to the doors in the top", 20, "white")
+
+
+      ttext.type = "ttext";
+      ttext.offset(547, 720);
+
+      var ttext2 = new sjs.Text("right corner to advance!", 20, "white")
+
+
+      ttext2.type = "ttext2";
+      ttext2.offset(640, 750);
+
+      var ttext3 = new sjs.Text("WS - right paddle, Up arrow and down arrow - left paddle.", 20, "white")
+
+
+      ttext3.type = "ttext3";
+      ttext3.centerH();
+      //EXIT DOORS
+
+      var extdoors = new sjs.Image("GameImages/endwall.png");
+
+      extdoors.type = "extdoors";
+      extdoors.offset(2000, 0);
+      extdoors.setSize(200, 50);
+
+      sjs.onHit("ball", "extdoors", function (ball, extdoors) {
+        window.location = "LVL4.html";
+      });
+
+      //Speedrun Timer For level
+      var time = 0;
+      var time_txt = new sjs.Text("Time: 0", 21, "orange");
+      time.type = "time";
+
+      setInterval(function () {
+        time = time + 1;
+        time_txt.setText("Time: " + time);
+      }, 1000);
+
+
+
+
+    } //End Start
+
+
+
+
+  </script>
+</head>
+
+<body onload="start()">
+  <h1> Dungeon Crawler </h1>
+  <div id="target" style="margin:auto;background:black;""></div>
+        </body>
+</html>

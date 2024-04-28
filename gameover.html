@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+  <script>
+
+    function start() {
+      sjs.open("target", 1500, 780);
+
+      //Restart Button
+      var rbutton = new sjs.Button("Restart?", function () {
+        window.location = "index.html";
+      });
+
+      rbutton.type = "rbutton";
+      rbutton.setSize(600, 600);
+      rbutton.center();
+
+
+
+    } //End Start
+
+
+
+
+  </script>
+</head>
+
+<body onload="start()">
+  <h1> Dungeon Crawler </h1>
+  <div id="target" style="margin:auto;background:black;""></div>
+        </body>
+</html>

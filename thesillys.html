@@ -1,0 +1,115 @@
+<html>
+
+<head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+  <script>
+
+    function start() {
+      sjs.open("target", 1500, 780);
+
+      var sheldoncharacter = new sjs.Image("GameImages/sheldon.png");
+
+      sheldoncharacter.type = "sheldoncharacter";
+      sheldoncharacter.setSize(40, 40);
+      sheldoncharacter.centerH().bottom();
+      sheldoncharacter.friction = 0.6;
+      sheldoncharacter.accel = 0.3;
+
+      //Sheldon controls
+
+      sjs.keyDown(W_KEY, function () {
+        sheldoncharacter.pushUp();
+      });
+
+      sjs.keyDown(S_KEY, function () {
+        sheldoncharacter.pushDown();
+      });
+
+      sjs.keyDown(A_KEY, function () {
+        sheldoncharacter.pushLeft();
+      });
+
+      sjs.keyDown(D_KEY, function () {
+        sheldoncharacter.pushRight();
+      });
+
+      sjs.keyDown(G_KEY, function () {
+        sheldoncharacter.friction = 0.3;
+        sheldoncharacter.accel = 0.6;
+        sheldoncharacter.pushUp(4);
+      });
+
+      sjs.keyDown(H_KEY, function () {
+        sheldoncharacter.friction = 0.3;
+        sheldoncharacter.accel = 0.6;
+        sheldoncharacter.pushDown(4);
+      });
+
+      sjs.keyDown(V_KEY, function () {
+        sheldoncharacter.friction = 0.3;
+        sheldoncharacter.accel = 0.6;
+        sheldoncharacter.pushLeft(4);
+      });
+
+      sjs.keyDown(B_KEY, function () {
+        sheldoncharacter.friction = 0.3;
+        sheldoncharacter.accel = 0.6;
+        sheldoncharacter.pushRight(4);
+      });
+
+      //Deathballs
+      var MemeDeathball = new sjs.Image("GameImages/thesillys1goober.png");
+      MemeDeathball.type = "MemeDeathball";
+      MemeDeathball.centerH();
+      MemeDeathball.setSize(20, 20);
+      MemeDeathball.friction = 0;
+      MemeDeathball.bounce();
+      MemeDeathball.pushUp(4);
+      MemeDeathball.pushRight(3);
+
+      setInterval(function () {
+        var MemeDeathball1 = new sjs.Image("GameImages/thesillys1goober.png");
+        MemeDeathball1.type = "MemeDeathball1";
+        MemeDeathball1.centerH();
+        MemeDeathball1.setSize(20, 20);
+        MemeDeathball1.friction = 0;
+        MemeDeathball1.bounce();
+        MemeDeathball1.pushUp(4);
+        MemeDeathball1.pushRight(3);
+      }, 1000);
+
+      sjs.onHit("MemeDeathball", "sheldoncharacter", function (MemeDeathball, sheldoncharacter) {
+        window.location = "gameover.html"
+      });
+
+      sjs.onHit("MemeDeathball1", "sheldoncharacter", function (MemeDeathball1, sheldoncharacter) {
+        window.location = "gameover.html"
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    } //End Start
+
+
+
+
+  </script>
+</head>
+
+<body onload="start()">
+  <h1> Dungeon Crawler </h1>
+  <div id="target" style="margin:auto;background:black;""></div>
+                </body>
+        </html>
+          
