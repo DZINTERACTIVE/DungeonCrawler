@@ -119,11 +119,11 @@
       //END LVL WALL COLLISION
 
       sjs.onHit("character1", "endwall", function (character1, endwall) {
-        window.location = "LVL6.html";
+        window.location = "LVL8.html";
       });
 
       sjs.onHit("sheldoncharacter", "endwall", function (sheldoncharacter, endwall) {
-        window.location = "LVL6.html";
+        window.location = "LVL8.html";
       });
       //Normal wall collisions
 
@@ -233,7 +233,7 @@
         Deathball1.bounce();
         Deathball1.pushUp(4);
         Deathball1.pushRight(3);
-      }, 4000);
+      }, 1500);
 
       //New ball collisions
 
@@ -272,12 +272,12 @@
       ttext.bottom().left();
 
       //Speedrun Timer For level
-      var time = 0;
-      var time_txt = new sjs.Text("Time: 0", 21, "orange");
+      var time = 60;
+      var time_txt = new sjs.Text("Time: 60", 21, "orange");
       time.type = "time";
 
       setInterval(function () {
-        time = time + 1;
+        time = time - 1;
         time_txt.setText("Time: " + time);
       }, 1000);
 
@@ -366,27 +366,7 @@
         sjs.bounceOff(character1, sheldoncharacter);
       });
 
-      //Thesillysteleport
-
-      var thesillystel = new sjs.Image("GameImages/blackbox.png");
-
-      thesillystel.type = "thesillystel"
-      thesillystel.setSize(40, 40);
-      thesillystel.offset(1450, -300);
-      sjs.onHit("sheldoncharacter", "thesillystel", function (sheldoncharacter, thesillystel) {
-        sjs.bounceOff(sheldoncharacter, thesillystel);
-        window.location = "thesillys.html";
-      });
-
-
-
-
-
-
-
-
-
-
+      
 
 
     } //End Start
