@@ -61,7 +61,7 @@
       var MemeDeathball = new sjs.Image("GameImages/thesillys1goober.png");
       MemeDeathball.type = "MemeDeathball";
       MemeDeathball.centerH();
-      MemeDeathball.setSize(20, 20);
+      MemeDeathball.setSize(30, 30);
       MemeDeathball.friction = 0;
       MemeDeathball.bounce();
       MemeDeathball.pushUp(4);
@@ -71,7 +71,7 @@
         var MemeDeathball1 = new sjs.Image("GameImages/thesillys1goober.png");
         MemeDeathball1.type = "MemeDeathball1";
         MemeDeathball1.centerH();
-        MemeDeathball1.setSize(20, 20);
+        MemeDeathball1.setSize(30, 30);
         MemeDeathball1.friction = 0;
         MemeDeathball1.bounce();
         MemeDeathball1.pushUp(4);
@@ -85,6 +85,19 @@
       sjs.onHit("MemeDeathball1", "sheldoncharacter", function (MemeDeathball1, sheldoncharacter) {
         window.location = "gameover.html"
       });
+
+      //Walls
+      var wall1 = new sjs.Image("GameImages/wall1.png");
+      wall1.type = "wall1";
+      wall1.setSize(1500, 50);
+      wall1.offset(-1500, 600);
+
+      sjs.onHit("sheldoncharacter", "wall1", function (sheldoncharacter, wall1) {
+        sjs.bounceOff(sheldoncharacter, wall1);
+      });
+
+
+
 
 
 
@@ -108,7 +121,7 @@
 </head>
 
 <body onload="start()">
-  <h1> Dungeon Crawler </h1>
+  <h1> The Sillys </h1>
   <div id="target" style="margin:auto;background:black;""></div>
                 </body>
         </html>
